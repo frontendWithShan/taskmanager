@@ -7,7 +7,7 @@ import { setFilter } from '../redux/actions/filterActions';
 
 const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) => {
   const [editingIndex, setEditingIndex] = useState(null);
-  const [editedTask, setEditedTask] = useState({ title: '', description: '' });
+  const [editedTask, setEditedTask] = useState({ title: '', description: '', completed: false, });
   const [displayedTasks, setDisplayedTasks] = useState(tasks);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchVisible, setSearchVisible] = useState(false);
@@ -35,14 +35,21 @@ const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) =>
     setEditedTask({
       title: tasks[index].title,
       description: tasks[index].description,
+      completed: tasks[index].completed, // Set completed as a boolean
     });
   };
+  
 
   const handleSaveEdit = (index) => {
     tasks[index].title = editedTask.title;
     tasks[index].description = editedTask.description;
+
+    // Update the status based on the editedTask's completed field
+    tasks[index].completed = editedTask.completed;
+
     setEditingIndex(null);
   };
+
 
   const toggleSearch = () => {
     setSearchVisible(!isSearchVisible);
@@ -125,6 +132,7 @@ const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) =>
                     <option value="pending">Pending</option>
                   </select>
                 </th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -159,6 +167,22 @@ const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) =>
                       <span>{task.description}</span>
                     )}
                   </td>
+
+                  {editingIndex === index ? (
+                    <td>
+                      <select
+                        value={editedTask.completed ? "completed" : "pending"}
+                        onChange={(e) =>
+                          setEditedTask({ ...editedTask, completed: e.target.value === "completed" })
+                        }
+                      >
+                        <option value="completed">Completed</option>
+                        <option value="pending">Pending</option>
+                      </select>
+                      </td>):""
+                  }
+
+
                   <td style={tdStyle}>
                     {editingIndex === index ? (
                       <button
