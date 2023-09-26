@@ -10,7 +10,7 @@ const iconStyle = {
 
 const ThemeSwitcher = ({ theme, toggleTheme }) => {
   return (
-    <button onClick={toggleTheme} style={{ display: 'flex', alignItems: 'center',color:"transparent" }}>
+    <button onClick={toggleTheme} style={{ display: 'flex', alignItems: 'center',background:"transparent" }}>
       {theme === 'light' ? <FontAwesomeIcon icon={faMoon} style={iconStyle} /> : <FontAwesomeIcon icon={faSun} style={iconStyle} />}
     </button>
   );
