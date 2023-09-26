@@ -9,9 +9,13 @@ const Header = () => {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: theme === 'light' ? '#007bff' : 'black',
+    background: theme === 'light' ? ' linear-gradient(176deg,#63edbc 0%,#079361 99%)':'linear-gradient(120deg, #000000, #36454f)',
     color: theme === 'light' ? 'white' : '#fff',
-    padding: '20px 0',
+    padding: '5px 0',
+    width :"70%",
+    height:"50px",
+    border:"2px solid white",
+    borderRadius:"45px"
   };
 
   const switcherStyle = {
@@ -24,7 +28,7 @@ const Header = () => {
       <div style={switcherStyle}>
       </div>
       <h1 style={{ margin: '0', fontSize: '24px', flex: 1, textAlign: 'center' }}>
-        Task Manager App
+        Task Manager
       </h1>
       <div style={switcherStyle}>
         <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />

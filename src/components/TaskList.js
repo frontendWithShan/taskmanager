@@ -4,7 +4,7 @@ import { deleteTask, toggleTaskStatus } from '../redux/actions/taskActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrashAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { setFilter } from '../redux/actions/filterActions';
-
+import './TaskList.css';
 const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedTask, setEditedTask] = useState({ title: '', description: '', completed: false, });
@@ -35,7 +35,7 @@ const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) =>
     setEditedTask({
       title: tasks[index].title,
       description: tasks[index].description,
-      completed: tasks[index].completed, // Set completed as a boolean
+      completed: tasks[index].completed, 
     });
   };
   
@@ -43,8 +43,6 @@ const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) =>
   const handleSaveEdit = (index) => {
     tasks[index].title = editedTask.title;
     tasks[index].description = editedTask.description;
-
-    // Update the status based on the editedTask's completed field
     tasks[index].completed = editedTask.completed;
 
     setEditingIndex(null);
@@ -61,7 +59,7 @@ const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) =>
 
   const tableContainerStyle = {
     maxWidth: '100%',
-    overflowX: 'auto', // Add horizontal scrolling for small screens
+    overflowX: 'auto', 
   };
 
   const tableCellStyle = {
@@ -69,12 +67,10 @@ const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) =>
   };
 
   const thStyle = {
-    backgroundColor: '#f0f0f0',
     textAlign: 'left',
     padding: '10px',
   };
   const thStyles = {
-    backgroundColor: '#f0f0f0',
     textAlign: 'left',
     padding: '10px',
     display: 'flex',
@@ -186,6 +182,7 @@ const TaskList = ({ tasks, deleteTask, toggleTaskStatus, filter, setFilter }) =>
                   <td style={tdStyle}>
                     {editingIndex === index ? (
                       <button
+                      className='saveButton'
                         style={buttonStyle}
                         onClick={() => handleSaveEdit(index)}
                       >
